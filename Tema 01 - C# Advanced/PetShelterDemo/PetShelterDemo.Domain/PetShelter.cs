@@ -48,7 +48,7 @@ public class PetShelter
 
     public IReadOnlyList<Pet> GetAllPets()
     {
-        return petRegistry.GetAll().Result; // Actually blocks thread until the result is available.
+        return petRegistry.GetAll().Result;  // Actually blocks thread until the result is available.
     }
 
     public Pet GetByName(string name)
