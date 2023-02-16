@@ -53,7 +53,7 @@ void StartFundraiser()
     Console.WriteLine("Briefly describe for future donors: ");
     var description = ReadString();
 
-    Console.WriteLine("What's the target amount? ");
+    Console.WriteLine("What's the target amount? (RON)");
     var targetDonation = ReadInteger();
 
     var fundraiser = new Fundraiser(title, description, targetDonation);
@@ -94,7 +94,7 @@ string SeeFundraiserDetailsByTitle(string title)
 {
     var fundraiser = shelter.GetFundraiserByName(title);
     //Console.WriteLine($"A few words about {fundraiser.Title}: {fundraiser.Description}"+"\n\n");
-    return ($"A few words about {fundraiser.Title}: {fundraiser.Description}, {fundraiser.CurrentDonation}/{fundraiser.DonationTarget}");
+    return ($"A few words about {fundraiser.Title}: {fundraiser.Description}, {fundraiser.CurrentDonation}/{fundraiser.DonationTarget} RON");
 }
 
 void ContributeToFundraiser(Fundraiser fundraiser)
