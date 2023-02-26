@@ -209,8 +209,7 @@ void SeeFundraisers()
                     foreach (var donor in donors)
                     {
                         Console.WriteLine($"{donor.Name} (^-^)");
-                        // AFISEAZA PE TOATA LUMEA CARE A DONAT CEVA ORIUNDE
-                        // NU AFISEAZA DONATORII CARE AU DONAT DOAR LA FUNDATIA RESPECTIVA
+                        
                     }
                 });
         }
