@@ -1,0 +1,9 @@
+-Am scos app.builder pentru a nu mai aparea probleme de oprit aplicatia cand se apasa pe
+anumite butoane.
+-IsHealthy si IsSheltered mereu au valoarea true de la default, chiar daca pun 0 - false,
+am presupus ca e de la configuration, doar ca tot nu am reusit.
+-Doua optiuni (donatii generale si afisarea lor) nu le-am mai implementat pentru ca erau
+putin repetitive si posibil sa fi adus probleme la tabele lipsind Fk-uri.
+-La tabela de legatura M-M DonationFundraiser am pus la inceput si o coloana Id
+care acum este in plus si se completeaza mereu cu 0, dar la functionalitate nu aduce probleme,
+doar ca este in plus.
