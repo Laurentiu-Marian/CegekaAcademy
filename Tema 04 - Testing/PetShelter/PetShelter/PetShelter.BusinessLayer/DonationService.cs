@@ -29,7 +29,9 @@ public class DonationService
 
         await _donationRepository.Add(new DataAccessLayer.Models.Donation
         {
-            Amount = addDonationRequest.Amount
+            Amount = addDonationRequest.Amount,
+            DonorId = donor.Id,
+            Donor = donor
             
         });
     }
