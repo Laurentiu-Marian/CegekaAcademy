@@ -8,5 +8,6 @@ namespace PetShelter.DataAccessLayer.Repository
         Task<List<T>> GetAll();
         Task<T?> GetById(int id);
         Task Update(T entity);
+        Task Delete(T entity);
     }
 }

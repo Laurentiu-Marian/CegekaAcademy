@@ -12,6 +12,11 @@ public class PersonRepository : BaseRepository<Person>, IPersonRepository
 
     public async Task<Person?> GetPersonByIdNumber(string idNumber)
     {
-        return await _context.Persons.SingleOrDefaultAsync(p => p.IdNumber == idNumber);
+        var toCheck = await _context.Persons.SingleOrDefaultAsync(p => p.IdNumber == idNumber);
+        if (toCheck==default)
+        {
+            return null;
+        }
+        return toCheck;
     }
 }

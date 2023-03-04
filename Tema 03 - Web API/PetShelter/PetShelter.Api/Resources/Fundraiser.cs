@@ -6,6 +6,7 @@ public class Fundraiser
     public int GoalValue { get; set; }
     public string Description { get; set; }
     //public Person Owner { get; set; }
+    public int OwnerId { get; set; }
     public DateTime DueDate { get; set; }
     public bool Status { get; set; } = true;
     public int CurrentDonation { get; set; } = 0;

@@ -78,5 +78,16 @@ namespace PetShelter.Domain.Services
             await _fundraiserRepository.Add(newFundraiser);
             return newFundraiser.Id;
         }
+
+        public async Task<Fundraiser> DeleteFundraiserAsync(int fundraiserId)
+        {
+            var fundraiser = await _fundraiserRepository.GetById(fundraiserId);
+            if (fundraiser != null)
+            {
+                _fundraiserRepository.Delete(fundraiser);
+            }
+
+            return null;
+        }
     }
 }

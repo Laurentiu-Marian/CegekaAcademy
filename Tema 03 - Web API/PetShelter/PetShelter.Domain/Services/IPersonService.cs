@@ -9,4 +9,6 @@ namespace PetShelter.Domain.Services;
 public interface IPersonService
 {
     Task<Person> GetPerson(int personId);
+
+    Task UpdateFundraiserAsync(string personId, Person person);
 }

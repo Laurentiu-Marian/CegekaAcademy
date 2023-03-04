@@ -32,5 +32,22 @@ namespace PetShelter.Domain.Services
 
             return person.ToDomainModel();
         }
+
+        public async Task UpdateFundraiserAsync(string personId, Person person)
+        {
+
+            var personToUpdate = await _personRepository.GetPersonByIdNumber(personId);
+            if (person == null)
+            {
+                throw new NotFoundException($"Fundraiser with id {personId} not found.");
+            }
+
+            personToUpdate.DateOfBirth = person.DateOfBirth;
+            personToUpdate.IdNumber = person.IdNumber;
+            personToUpdate.Name = person.Name;
+            personToUpdate.FundraiserCreatorId = person.FundraiserCreatorId;
+
+            await _personRepository.Update(personToUpdate);
+        }
     }
 }

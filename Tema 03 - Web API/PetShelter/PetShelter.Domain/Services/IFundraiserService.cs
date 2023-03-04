@@ -12,5 +12,6 @@ namespace PetShelter.Domain.Services
         Task<IReadOnlyCollection<Fundraiser>> GetAllFundraisers();
         Task UpdateFundraiserAsync(int fundraiserId, Fundraiser fundraiser);
         Task<int> CreateFundraiserAsync(Person owner, Fundraiser fundraiser);
+        Task<Fundraiser> DeleteFundraiserAsync(int fundraiserId);
     }
 }

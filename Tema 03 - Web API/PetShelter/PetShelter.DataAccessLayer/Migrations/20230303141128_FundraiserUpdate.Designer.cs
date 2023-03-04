@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetShelter.DataAccessLayer;
 
@@ -11,9 +12,11 @@ using PetShelter.DataAccessLayer;
 namespace PetShelter.DataAccessLayer.Migrations
 {
     [DbContext(typeof(PetShelterContext))]
-    partial class PetShelterContextModelSnapshot : ModelSnapshot
+    [Migration("20230303141128_FundraiserUpdate")]
+    partial class FundraiserUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,7 +76,7 @@ namespace PetShelter.DataAccessLayer.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("OwnerId")
+                    b.Property<int?>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Status")

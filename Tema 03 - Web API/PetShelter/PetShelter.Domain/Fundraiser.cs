@@ -11,6 +11,7 @@ namespace PetShelter.Domain
         public string Name { get; set; }
         public int GoalValue { get; set; }
         public string Description { get; set; }
+        public int OwnerId { get; set; }
         public Person Owner { get; set; }
         public DateTime DueDate { get; set; }
         public bool Status { get; set; } = true;
@@ -18,11 +19,12 @@ namespace PetShelter.Domain
         public DateTime CreationDate { get; set; } = DateTime.Now;
 
         public Fundraiser() { }
-        public Fundraiser(string name, int goalValue, string description, Person owner, DateTime dueDate, bool status, int currentDonation, DateTime creationDate)
+        public Fundraiser(string name, int goalValue, string description, int ownerId, Person owner, DateTime dueDate, bool status, int currentDonation, DateTime creationDate)
         {
             Name= name;
             GoalValue= goalValue;
             Description= description;
+            OwnerId= ownerId;
             Owner= owner;
             DueDate=dueDate;
             Status= status;

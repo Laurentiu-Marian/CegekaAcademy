@@ -20,6 +20,7 @@ namespace PetShelter.Domain.Extensions.DomainModel
             domainModel.Description = fundraiser.Description;
             domainModel.DueDate = fundraiser.DueDate;
             domainModel.Owner = fundraiser.Owner.ToDomainModel();
+            domainModel.OwnerId = fundraiser.OwnerId;
             domainModel.GoalValue = fundraiser.GoalValue;
             domainModel.CreationDate = fundraiser.CreationDate;
             domainModel.CurrentDonation = fundraiser.CurrentDonation;

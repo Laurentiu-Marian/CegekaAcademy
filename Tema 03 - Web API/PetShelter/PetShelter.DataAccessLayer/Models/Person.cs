@@ -12,6 +12,9 @@ public class Person: IEntity
 
     public string IdNumber { get; set; }
 
+    public int? FundraiserCreatorId { get; set; }
+    public Fundraiser Fundraiser { get; set; }
+
     public ICollection<Pet> RescuedPets { get; set; }
     public ICollection<Pet> AdoptedPets { get; set; }
     public ICollection<Donation> Donations { get; set; }

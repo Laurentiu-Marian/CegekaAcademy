@@ -23,7 +23,9 @@ namespace PetShelter.DataAccessLayer.Configuration
             builder.Property(p => p.CurrentDonation).IsRequired();
             builder.Property(p => p.DueDate).IsRequired();
             builder.Property(p => p.CreationDate).IsRequired();
-            builder.Property(p => p.Description).IsRequired().HasMaxLength(255);
+            builder.Property(p => p.Description).IsRequired().HasMaxLength(5000);
+            //builder.Property(p => p.OwnerId).IsRequired();
+
 
             builder.HasOne(p => p.Owner).WithMany(p => p.Fundraisers).HasForeignKey(p => p.OwnerId)
             .IsRequired(false);

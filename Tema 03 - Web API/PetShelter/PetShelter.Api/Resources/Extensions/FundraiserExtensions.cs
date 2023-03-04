@@ -9,6 +9,7 @@ namespace PetShelter.Api.Resources.Extensions
             return new Domain.Fundraiser
             {
                 Name = fundraiser.Name,
+                OwnerId= fundraiser.OwnerId,
                 Description = fundraiser.Description,
                 DueDate = fundraiser.DueDate,
                 CreationDate = fundraiser.CreationDate,
@@ -31,6 +32,7 @@ namespace PetShelter.Api.Resources.Extensions
             domainModel.Description = fundraiser.Description;
             domainModel.DueDate = fundraiser.DueDate;
             domainModel.Owner = fundraiser.Owner.AsDomainModel();
+            domainModel.OwnerId = fundraiser.OwnerId;
             domainModel.GoalValue = fundraiser.GoalValue;
             domainModel.CreationDate = fundraiser.CreationDate;
             domainModel.CurrentDonation = fundraiser.CurrentDonation;
@@ -44,6 +46,7 @@ namespace PetShelter.Api.Resources.Extensions
             return new IdentifiableFundraiser
             {
                 Name = fundraiser.Name,
+                OwnerId = fundraiser.OwnerId,
                 Description = fundraiser.Description,
                 DueDate = fundraiser.DueDate,
                 CreationDate = fundraiser.CreationDate,

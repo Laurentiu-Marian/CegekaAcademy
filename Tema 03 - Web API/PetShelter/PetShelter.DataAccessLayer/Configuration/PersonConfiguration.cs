@@ -14,5 +14,8 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
         //Columns mapping and constraints
         builder.Property(p => p.Name).IsRequired().HasMaxLength(255);
         builder.Property(p => p.IdNumber).HasMaxLength(50).IsRequired();
+
+        builder.HasOne(p => p.Fundraiser).WithMany(p => p.Donors).HasForeignKey(p => p.FundraiserCreatorId)
+            .IsRequired(false);
     }
 }

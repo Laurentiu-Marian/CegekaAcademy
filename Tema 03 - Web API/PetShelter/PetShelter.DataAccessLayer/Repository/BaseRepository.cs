@@ -32,4 +32,10 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class, IE
     {
         return await _context.Set<T>().SingleOrDefaultAsync(x => x.Id == id);
     }
+
+    public async Task Delete(T entity)
+    {
+        _context.Remove(entity);
+        await _context.SaveChangesAsync();
+    }
 }

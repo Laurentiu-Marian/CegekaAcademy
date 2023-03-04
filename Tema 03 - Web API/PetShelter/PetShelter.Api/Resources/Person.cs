@@ -7,5 +7,7 @@
         public DateTime? DateOfBirth { get; set; }
 
         public string IdNumber { get; set; }
+
+        public int? FundraiserCreatorId { get; set; }
     }
 }

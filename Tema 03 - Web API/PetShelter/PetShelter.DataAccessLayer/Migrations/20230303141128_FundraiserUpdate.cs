@@ -6,26 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PetShelter.DataAccessLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class FundraiserUpdate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Persons",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IdNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Persons", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Donations",
                 columns: table => new
@@ -38,12 +23,47 @@ namespace PetShelter.DataAccessLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Donations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Fundraisers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    GoalValue = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
+                    OwnerId = table.Column<int>(type: "int", nullable: true),
+                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    CurrentDonation = table.Column<int>(type: "int", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fundraisers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Persons",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IdNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FundraiserCreatorId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Persons", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Donations_Persons_DonorId",
-                        column: x => x.DonorId,
-                        principalTable: "Persons",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Persons_Fundraisers_FundraiserCreatorId",
+                        column: x => x.FundraiserCreatorId,
+                        principalTable: "Fundraisers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -84,6 +104,16 @@ namespace PetShelter.DataAccessLayer.Migrations
                 column: "DonorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Fundraisers_OwnerId",
+                table: "Fundraisers",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Persons_FundraiserCreatorId",
+                table: "Persons",
+                column: "FundraiserCreatorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pets_AdopterId",
                 table: "Pets",
                 column: "AdopterId");
@@ -92,11 +122,30 @@ namespace PetShelter.DataAccessLayer.Migrations
                 name: "IX_Pets_RescuerId",
                 table: "Pets",
                 column: "RescuerId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Donations_Persons_DonorId",
+                table: "Donations",
+                column: "DonorId",
+                principalTable: "Persons",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Fundraisers_Persons_OwnerId",
+                table: "Fundraisers",
+                column: "OwnerId",
+                principalTable: "Persons",
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Fundraisers_Persons_OwnerId",
+                table: "Fundraisers");
+
             migrationBuilder.DropTable(
                 name: "Donations");
 
@@ -105,6 +154,9 @@ namespace PetShelter.DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Persons");
+
+            migrationBuilder.DropTable(
+                name: "Fundraisers");
         }
     }
 }

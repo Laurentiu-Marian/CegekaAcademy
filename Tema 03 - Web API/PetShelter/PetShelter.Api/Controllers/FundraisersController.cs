@@ -16,10 +16,12 @@ namespace PetShelter.Api.Controllers
     public class FundraisersController : ControllerBase
     {
         private readonly IFundraiserService _fundraiserService;
+        private readonly IPersonService _personService;
 
-        public FundraisersController(IFundraiserService fundraiserService)
+        public FundraisersController(IFundraiserService fundraiserService, IPersonService personService)
         {
             _fundraiserService = fundraiserService;
+            _personService = personService;
         }
 
         [HttpGet]
@@ -31,7 +33,7 @@ namespace PetShelter.Api.Controllers
             return this.Ok(data.Select(p => p.AsResource()).ToImmutableArray());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -66,7 +68,19 @@ namespace PetShelter.Api.Controllers
         public async Task<IActionResult> CreateFundraise([FromBody] Api.Resources.CreatorOfFundraiser fundraiser)
         {
             var id = await _fundraiserService.CreateFundraiserAsync(fundraiser.Owner.AsDomainModel(), fundraiser.AsDomainModel());
+            
             return CreatedAtRoute(nameof(CreateFundraise), id);
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IdentifiableFundraiser>> Delete(int id)
+        {
+            await _fundraiserService.DeleteFundraiserAsync(id);
+
+            return null;
         }
     }
 }
