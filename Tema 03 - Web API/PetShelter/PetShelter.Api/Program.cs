@@ -13,6 +13,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.AllowAnyHeader();
+            policy.AllowAnyOrigin();
+            policy.AllowAnyMethod();
+        });
+});
+
 builder.Services.AddDbContext<PetShelterContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("PetShelterConnection"),
         providerOptions =>
@@ -20,6 +31,7 @@ builder.Services.AddDbContext<PetShelterContext>(options =>
             providerOptions.MigrationsAssembly("PetShelter.DataAccessLayer");
             providerOptions.EnableRetryOnFailure();
         }));
+
 builder.Services.AddScoped<IPetService, PetService>();
 builder.Services.AddScoped<IPetRepository, PetRepository>();
 builder.Services.AddScoped<IPersonService, PersonService>();
@@ -53,6 +65,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors();
 
 app.MapControllers();
 
