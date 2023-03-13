@@ -96,7 +96,7 @@ namespace PetShelter.BusinessLayer.Tests
 
         }
 
-        /*
+        
         [Fact]
         public async void GivenValidData_WhenRescuePet_PetIsAdded()
         {
@@ -144,6 +144,6 @@ namespace PetShelter.BusinessLayer.Tests
             //Assert
             //_mockPetRepository.Verify(x => x.Add(It.Is<Pet>(p => p.Name == _request.PetName)), Times.Never);
         }
-        */
+        
     }
 }
